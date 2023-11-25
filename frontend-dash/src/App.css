@@ -1,0 +1,37 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.nav-ul {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding: 15px;
+	list-style-type: none;
+}
+
+.nav-ul li a {
+	color: white;
+	padding: 5px;
+	text-decoration: none;
+	padding: 10px;
+}
+
+.Footer {
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+	width: 100%;
+	background: #8b1c1c;
+	height: 100px;
+	padding-top: 20px;
+}
+.input-box {
+	display: block;
+	margin: 25px;
+	padding: 7px;
+	width: 300px;
+	border: 1px solid orangered;
+	border-radius: 3px;
+}
