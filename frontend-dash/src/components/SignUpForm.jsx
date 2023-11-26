@@ -1,53 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { signUpSchema } from '../Schemas';
+
+const initialValues = {
+	name: '',
+	email: '',
+	password: '',
+};
 
 const SignUpForm = () => {
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 	const navigate = useNavigate();
 
-	// const submitData = async () => {
-	// 	console.warn(name, email, password);
-	// 	try {
-	// 		let result = await fetch('http://localhost:5000/register', {
-	// 			method: 'POST',
-	// 			body: JSON.stringify({ name, email, password }),
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 			},
-	// 		});
+	const formik = useFormik({
+		initialValues,
+		validationSchema: signUpSchema,
+		onSubmit: async values => {
+			try {
+				console.log('Form values:', values);
 
-	// 		if (!result.ok) {
-	// 			throw new Error(`HTTP error! Status: ${result.status}`);
-	// 		}
+				let result = await fetch('http://localhost:5000/register', {
+					method: 'POST',
+					body: JSON.stringify(values),
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				});
 
-	// 		result = await result.json();
-	// 		console.warn(result);
+				if (!result.ok) {
+					throw new Error(`HTTP error! Status: ${result.status}`);
+				}
 
-	// 		if (result) {
-	// 			navigate('/');
-	// 		}
-	// 	} catch (error) {
-	// 		console.error('Fetch error:', error);
-	// 	}
-	// };
+				result = await result.json();
+				console.log('API response:', result);
 
-	const submitData = async () => {
-		console.warn(name, email, password);
-		let result = await fetch('http://localhost:5000/register', {
-			method: 'POST',
-			body: JSON.stringify({ name, email, password }),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		result = await result.json();
-		console.warn(result);
-		if (result) {
+				localStorage.setItem('user', JSON.stringify(result));
+
+				navigate('/');
+			} catch (error) {
+				console.error('Fetch error:', error);
+			}
+		},
+	});
+
+	useEffect(() => {
+		const auth = localStorage.getItem('user');
+		if (auth) {
 			navigate('/');
 		}
-	};
+	});
+
 	return (
 		<div style={{ marginLeft: '35%', marginTop: 60 }}>
 			<h1 style={{ marginLeft: 90, color: 'orange' }}>Registration</h1>
@@ -55,37 +57,43 @@ const SignUpForm = () => {
 				className='input-box'
 				type='text'
 				placeholder='enter a name'
-				value={name}
-				onChange={e => setName(e.target.value)}
+				name='name'
+				value={formik.values.name}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
 			/>
+			{formik.errors.name && formik.touched.name ? (
+				<p className='form-error'>{formik.errors.name}</p>
+			) : null}
+
 			<input
 				className='input-box'
 				type='text'
-				placeholder='enter a email'
-				value={email}
-				onChange={e => setEmail(e.target.value)}
+				placeholder='enter an email'
+				name='email'
+				value={formik.values.email}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
 			/>
+			{formik.errors.email && formik.touched.email ? (
+				<p className='form-error'>{formik.errors.email}</p>
+			) : null}
 			<input
 				className='input-box'
 				type='text'
 				placeholder='enter a password'
-				value={password}
-				onChange={e => setPassword(e.target.value)}
+				name='password'
+				value={formik.values.password}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
 			/>
+			{formik.errors.password && formik.touched.password ? (
+				<p className='form-error'>{formik.errors.password}</p>
+			) : null}
 			<button
 				type='button'
-				onClick={submitData}
-				style={{
-					margin: 21,
-					width: 150,
-					height: 30,
-					background: '#8b1c1c',
-					color: 'white',
-					border: 0,
-					borderRadius: 3,
-					marginLeft: 23,
-					cursor: 'pointer',
-				}}>
+				onClick={formik.handleSubmit}
+				className='signup-button'>
 				Sign Up
 			</button>
 		</div>

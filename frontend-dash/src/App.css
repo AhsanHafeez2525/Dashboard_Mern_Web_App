@@ -35,3 +35,23 @@
 	border: 1px solid orangered;
 	border-radius: 3px;
 }
+.signup-button {
+	margin: 21px;
+	width: 150px;
+	height: 30px;
+	background: #c58d8d;
+	color: white;
+	border: 0;
+	border-radius: 3px;
+	margin-left: 23px;
+	cursor: pointer;
+}
+
+.signup-button:hover {
+	background: #8b1c1c;
+}
+.form-error {
+	font-size: 1rem;
+	color: #f3211a;
+	margin-left: 26px;
+}
