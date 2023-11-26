@@ -30,10 +30,10 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
 	console.log(req.body);
 
-	if ((req, body.password && req.body.email)) {
-		let userLogin = await User.findOne(req.body).select('-password');
-		if (userLogin) {
-			res.send(userLogin);
+	if (req.body.password && req.body.email) {
+		let user = await User.findOne(req.body).select('-password');
+		if (user) {
+			res.send(user);
 		} else {
 			res.send({ result: 'No user found' });
 		}
