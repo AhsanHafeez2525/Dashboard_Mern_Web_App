@@ -56,7 +56,7 @@ const SignUpForm = () => {
 			<input
 				className='input-box'
 				type='text'
-				placeholder='enter a name'
+				placeholder='Enter a name'
 				name='name'
 				value={formik.values.name}
 				onChange={formik.handleChange}
@@ -69,7 +69,7 @@ const SignUpForm = () => {
 			<input
 				className='input-box'
 				type='text'
-				placeholder='enter an email'
+				placeholder='Enter an email'
 				name='email'
 				value={formik.values.email}
 				onChange={formik.handleChange}
@@ -80,8 +80,8 @@ const SignUpForm = () => {
 			) : null}
 			<input
 				className='input-box'
-				type='text'
-				placeholder='enter a password'
+				type='password'
+				placeholder='Enter a password'
 				name='password'
 				value={formik.values.password}
 				onChange={formik.handleChange}

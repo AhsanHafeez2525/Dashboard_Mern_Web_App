@@ -39,16 +39,22 @@ const Nav = () => {
 						<li>
 							<Link to='/profile'>Profile</Link>
 						</li>
-						<li>
-							{' '}
-							{auth ? (
-								<Link to='/signupform' onClick={logout}>
-									Logout
-								</Link>
-							) : (
-								<Link to='/signupform'>Sign Up</Link>
-							)}
-						</li>
+
+						{auth ? (
+							<Link to='/signupform' onClick={logout}>
+								Logout
+							</Link>
+						) : (
+							<>
+								<li>
+									<Link to='/signupform'>Sign Up</Link>
+								</li>
+
+								<li>
+									<Link to='/login'>Login</Link>
+								</li>
+							</>
+						)}
 					</ul>
 				</div>
 			</div>

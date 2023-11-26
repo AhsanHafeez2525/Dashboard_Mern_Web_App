@@ -35,6 +35,10 @@
 	border: 1px solid orangered;
 	border-radius: 3px;
 }
+.login {
+	margin-left: 35%;
+	margin-top: 100px;
+}
 .signup-button {
 	margin: 21px;
 	width: 150px;

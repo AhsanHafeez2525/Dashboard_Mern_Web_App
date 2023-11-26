@@ -5,6 +5,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignUpForm from './components/SignUpForm.jsx';
 import PrivateComponent from './components/PrivateComponent.jsx';
+import Login from './components/Login.jsx';
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 					</Route>
 
 					<Route path='/signupform' element={<SignUpForm />} />
+					<Route path='/login' element={<Login />} />
 				</Routes>
 			</BrowserRouter>
 			<Footer />
