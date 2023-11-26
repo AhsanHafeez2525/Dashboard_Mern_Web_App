@@ -1,12 +1,52 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpForm = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const navigate = useNavigate();
 
-	const submitData = () => {
+	// const submitData = async () => {
+	// 	console.warn(name, email, password);
+	// 	try {
+	// 		let result = await fetch('http://localhost:5000/register', {
+	// 			method: 'POST',
+	// 			body: JSON.stringify({ name, email, password }),
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 			},
+	// 		});
+
+	// 		if (!result.ok) {
+	// 			throw new Error(`HTTP error! Status: ${result.status}`);
+	// 		}
+
+	// 		result = await result.json();
+	// 		console.warn(result);
+
+	// 		if (result) {
+	// 			navigate('/');
+	// 		}
+	// 	} catch (error) {
+	// 		console.error('Fetch error:', error);
+	// 	}
+	// };
+
+	const submitData = async () => {
 		console.warn(name, email, password);
+		let result = await fetch('http://localhost:5000/register', {
+			method: 'POST',
+			body: JSON.stringify({ name, email, password }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		result = await result.json();
+		console.warn(result);
+		if (result) {
+			navigate('/');
+		}
 	};
 	return (
 		<div style={{ marginLeft: '35%', marginTop: 60 }}>
