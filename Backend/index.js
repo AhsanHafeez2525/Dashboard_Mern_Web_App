@@ -9,6 +9,8 @@ app.use(cors());
 app.post('/register', async (req, res) => {
 	let user = new User(req.body);
 	let result = await user.save();
+	result = result.toObject();
+	delete result.password;
 	// res.send(req.body);
 	res.send(result);
 });
@@ -24,6 +26,21 @@ app.post('/register', async (req, res) => {
 // app.get('/', (req, res) => {
 // 	res.send('welcome to mern stack course');
 // });
+
+app.post('/login', async (req, res) => {
+	console.log(req.body);
+
+	if ((req, body.password && req.body.email)) {
+		let userLogin = await User.findOne(req.body).select('-password');
+		if (userLogin) {
+			res.send(userLogin);
+		} else {
+			res.send({ result: 'No user found' });
+		}
+	}
+
+	// res.send(userLogin);
+});
 
 app.listen(5000, () => {
 	console.log('server is running');
