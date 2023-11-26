@@ -3,6 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 const Nav = () => {
 	const auth = localStorage.getItem('user');
 
+	const navigate = useNavigate();
+
+	const logout = () => {
+		localStorage.clear();
+		navigate('/signupform');
+		console.warn('logout');
+	};
+
 	return (
 		<div>
 			<div
@@ -34,7 +42,9 @@ const Nav = () => {
 						<li>
 							{' '}
 							{auth ? (
-								<Link to='/logout'>Logout</Link>
+								<Link to='/signupform' onClick={logout}>
+									Logout
+								</Link>
 							) : (
 								<Link to='/signupform'>Sign Up</Link>
 							)}
