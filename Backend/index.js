@@ -3,6 +3,7 @@ require('./db/config');
 const cors = require('cors');
 const User = require('./db/User');
 const app = express();
+const Product = require('./db/Product');
 
 app.use(express.json());
 app.use(cors());
@@ -44,4 +45,11 @@ app.post('/login', async (req, res) => {
 
 app.listen(5000, () => {
 	console.log('server is running');
+});
+
+app.post('/add-product', async (req, res) => {
+	let product = new Product(req.body);
+
+	let result = await product.save();
+	res.send(result);
 });

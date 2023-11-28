@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import NavLogo from '../assets/svgviewer-output.svg';
 const Nav = () => {
 	const auth = localStorage.getItem('user');
 
@@ -13,6 +14,16 @@ const Nav = () => {
 
 	return (
 		<div>
+			<img
+				src={NavLogo}
+				alt='logo'
+				style={{
+					width: 45,
+					float: 'left',
+					background: '#8b1c1c',
+					height: 50,
+				}}
+			/>
 			<div
 				style={{
 					background: '#8b1c1c',
@@ -42,7 +53,7 @@ const Nav = () => {
 
 						{auth ? (
 							<Link to='/signupform' onClick={logout}>
-								Logout
+								Logout ({JSON.parse(auth).name})
 							</Link>
 						) : (
 							<>
