@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const UpdateProduct = () => {
 	const [name, setName] = useState('');
@@ -8,6 +8,8 @@ const UpdateProduct = () => {
 	const [company, setCompany] = useState('');
 
 	const params = useParams();
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		getProductDetails();
@@ -32,7 +34,42 @@ const UpdateProduct = () => {
 
 	const updateProduct = async () => {
 		console.log(name, price, category, company);
+		let result = await fetch(`http://localhost:5000/product/${params.id}`, {
+			method: 'Put',
+			body: JSON.stringify({ name, price, category, company }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		result = await result.json();
+		console.warn(result);
+		navigate('/');
 	};
+
+	// const updateProduct = async () => {
+	// 	console.log(name, price, category, company);
+
+	// 	try {
+	// 		let result = await fetch(`http://localhost:5000/product/${params.id}`, {
+	// 			method: 'PUT', // Corrected to 'PUT'
+	// 			body: JSON.stringify({ name, price, category, company }),
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 			},
+	// 		});
+
+	// 		if (result.ok) {
+	// 			result = await result.json();
+	// 			console.warn(result);
+	// 			navigate('/');
+	// 		} else {
+	// 			// Handle error response
+	// 			console.error('Failed to update product. HTTP Status:', result.status);
+	// 		}
+	// 	} catch (error) {
+	// 		console.error('An error occurred while updating the product:', error);
+	// 	}
+	// };
 
 	return (
 		<div className='product'>
