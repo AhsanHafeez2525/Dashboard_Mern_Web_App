@@ -62,3 +62,22 @@ app.get('/products', async (req, res) => {
 		res.send({ result: 'No Products found' });
 	}
 });
+
+app.delete('/products/:id', async (req, res) => {
+	const result = await Product.deleteOne({ _id: req.params.id });
+	res.send(result);
+});
+
+// app.delete('/products/:id', async (req, res) => {
+// 	try {
+// 		const result = await Product.deleteOne({ _id: req.params.id });
+// 		if (result.deletedCount === 1) {
+// 			res.status(200).json({ message: 'Product deleted successfully' });
+// 		} else {
+// 			res.status(404).json({ message: 'Product not found' });
+// 		}
+// 	} catch (error) {
+// 		console.error('Error deleting product:', error);
+// 		res.status(500).json({ message: 'Internal server error' });
+// 	}
+// });
