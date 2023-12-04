@@ -105,3 +105,13 @@ app.get('/product/:id', async (req, res) => {
 		res.status(500).json({ error: 'Internal Server Error' });
 	}
 });
+
+app.put('/product/:id', async (req, res) => {
+	let result = await Product.updateOne(
+		{ _id: req.params.id },
+		{
+			$set: req.body,
+		}
+	);
+	res.send(result);
+});
