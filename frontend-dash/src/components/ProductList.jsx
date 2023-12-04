@@ -53,7 +53,7 @@ const ProductList = () => {
 								className='delete-button'>
 								Delete
 							</button>
-							<Link to={'/update/10' + item._id}>Update</Link>
+							<Link to={'/update/' + item._id}>Update</Link>
 						</li>
 					</ul>
 				</li>
