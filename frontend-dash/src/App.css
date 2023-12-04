@@ -87,3 +87,10 @@
 .product-list ul {
 	margin: 0;
 }
+.searchInput {
+	width: 400px;
+	height: 40px;
+	margin: 20px;
+	border: 1px solid skyblue;
+	padding-left: 20px;
+}
