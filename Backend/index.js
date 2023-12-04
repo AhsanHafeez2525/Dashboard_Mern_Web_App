@@ -81,3 +81,27 @@ app.delete('/products/:id', async (req, res) => {
 // 		res.status(500).json({ message: 'Internal server error' });
 // 	}
 // });
+
+// app.get('/product/:id', async (req, res) => {
+// 	let result = await Product.findOne({ _id: req.params.id });
+// 	if (result) {
+// 		res.send(result);
+// 	} else {
+// 		res.send({ result: 'No record found' });
+// 	}
+// });
+
+app.get('/product/:id', async (req, res) => {
+	try {
+		const result = await Product.findOne({ _id: req.params.id });
+
+		if (result) {
+			res.status(200).json(result);
+		} else {
+			res.status(404).json({ error: 'No record found' });
+		}
+	} catch (error) {
+		console.error('Error fetching product:', error);
+		res.status(500).json({ error: 'Internal Server Error' });
+	}
+});
