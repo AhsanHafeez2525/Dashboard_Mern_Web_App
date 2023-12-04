@@ -59,6 +59,14 @@
 .signup-button:hover {
 	background: #8b1c1c;
 }
+/* .delete-button {
+	width: 80px;
+	height: 30px;
+	background: #c58d8d;
+	color: white;
+	border: 0;
+	border-radius: 3px;
+} */
 .form-error {
 	margin-left: 26px;
 	font-size: 1rem;
@@ -67,12 +75,14 @@
 .product-list {
 	text-align: center;
 	margin-top: 100px;
+	list-style-type: none;
 }
 .product-list ul li {
 	display: inline-block;
 	border: 1px solid skyblue;
-	padding: 5px;
+	padding: 10 px;
 	width: 150px;
+	text-decoration: none;
 }
 .product-list ul {
 	margin: 0;
